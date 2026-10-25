@@ -15,7 +15,7 @@
 #endif
 
 #ifdef TOOLS_ENABLED
-#define CACHE_ROTATION_AND_SCALE
+// #define CACHE_ROTATION_AND_SCALE
 #endif // TOOLS_ENABLED
 
 class Node4D : public Node {
