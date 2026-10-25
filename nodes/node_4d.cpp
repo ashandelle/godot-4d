@@ -159,83 +159,83 @@ void Node4D::set_position(const Vector4 &p_position) {
 	_transform.set_origin(p_position);
 }
 
-#ifdef CACHE_ROTATION_AND_SCALE
-Euler4D Node4D::get_rotation() {
-	if (_euler_cache_dirty) {
-		_euler_cache = Euler4D::from_basis(_transform.basis);
-		_euler_cache_dirty = false;
-	}
-	return _euler_cache;
-}
+// #ifdef CACHE_ROTATION_AND_SCALE
+// Euler4D Node4D::get_rotation() {
+// 	if (_euler_cache_dirty) {
+// 		_euler_cache = Euler4D::from_basis(_transform.basis);
+// 		_euler_cache_dirty = false;
+// 	}
+// 	return _euler_cache;
+// }
 
-AABB Node4D::get_rotation_bind() {
-	return get_rotation();
-}
+// AABB Node4D::get_rotation_bind() {
+// 	return get_rotation();
+// }
 
-Ref<godot_4d_bind::Euler4D> Node4D::get_rotation_euler_bind() {
-	Ref<godot_4d_bind::Euler4D> rotation_euler_bind;
-	rotation_euler_bind.instantiate();
-	rotation_euler_bind->set_euler(get_rotation());
-	return rotation_euler_bind;
-}
+// Ref<godot_4d_bind::Euler4D> Node4D::get_rotation_euler_bind() {
+// 	Ref<godot_4d_bind::Euler4D> rotation_euler_bind;
+// 	rotation_euler_bind.instantiate();
+// 	rotation_euler_bind->set_euler(get_rotation());
+// 	return rotation_euler_bind;
+// }
 
-Euler4D Node4D::get_rotation_degrees() {
-	return get_rotation().rad_to_deg();
-}
+// Euler4D Node4D::get_rotation_degrees() {
+// 	return get_rotation().rad_to_deg();
+// }
 
-AABB Node4D::get_rotation_degrees_bind() {
-	return get_rotation_degrees();
-}
+// AABB Node4D::get_rotation_degrees_bind() {
+// 	return get_rotation_degrees();
+// }
 
-Ref<godot_4d_bind::Euler4D> Node4D::get_rotation_degrees_euler_bind() {
-	Ref<godot_4d_bind::Euler4D> rotation_degrees_euler_bind;
-	rotation_degrees_euler_bind.instantiate();
-	rotation_degrees_euler_bind->set_euler(get_rotation_degrees());
-	return rotation_degrees_euler_bind;
-}
+// Ref<godot_4d_bind::Euler4D> Node4D::get_rotation_degrees_euler_bind() {
+// 	Ref<godot_4d_bind::Euler4D> rotation_degrees_euler_bind;
+// 	rotation_degrees_euler_bind.instantiate();
+// 	rotation_degrees_euler_bind->set_euler(get_rotation_degrees());
+// 	return rotation_degrees_euler_bind;
+// }
 
-Vector4 Node4D::get_scale() {
-	if (_scale_cache_dirty) {
-		_scale_cache = _transform.get_scale();
-		_scale_cache_dirty = false;
-	}
-	return _scale_cache;
-}
-#else
-Euler4D Node4D::get_rotation() const {
-	return Euler4D::from_basis(_transform.basis);
-}
+// Vector4 Node4D::get_scale() {
+// 	if (_scale_cache_dirty) {
+// 		_scale_cache = _transform.get_scale();
+// 		_scale_cache_dirty = false;
+// 	}
+// 	return _scale_cache;
+// }
+// #else
+// Euler4D Node4D::get_rotation() const {
+// 	return Euler4D::from_basis(_transform.basis);
+// }
 
-AABB Node4D::get_rotation_bind() const {
-	return get_rotation();
-}
+// AABB Node4D::get_rotation_bind() const {
+// 	return get_rotation();
+// }
 
-Ref<godot_4d_bind::Euler4D> Node4D::get_rotation_euler_bind() const {
-	Ref<godot_4d_bind::Euler4D> rotation_euler_bind;
-	rotation_euler_bind.instantiate();
-	rotation_euler_bind->set_euler(get_rotation());
-	return rotation_euler_bind;
-}
+// Ref<godot_4d_bind::Euler4D> Node4D::get_rotation_euler_bind() const {
+// 	Ref<godot_4d_bind::Euler4D> rotation_euler_bind;
+// 	rotation_euler_bind.instantiate();
+// 	rotation_euler_bind->set_euler(get_rotation());
+// 	return rotation_euler_bind;
+// }
 
-Euler4D Node4D::get_rotation_degrees() const {
-	return get_rotation().rad_to_deg();
-}
+// Euler4D Node4D::get_rotation_degrees() const {
+// 	return get_rotation().rad_to_deg();
+// }
 
-AABB Node4D::get_rotation_degrees_bind() const {
-	return get_rotation_degrees();
-}
+// AABB Node4D::get_rotation_degrees_bind() const {
+// 	return get_rotation_degrees();
+// }
 
-Ref<godot_4d_bind::Euler4D> Node4D::get_rotation_degrees_euler_bind() const {
-	Ref<godot_4d_bind::Euler4D> rotation_degrees_euler_bind;
-	rotation_degrees_euler_bind.instantiate();
-	rotation_degrees_euler_bind->set_euler(get_rotation_degrees());
-	return rotation_degrees_euler_bind;
-}
+// Ref<godot_4d_bind::Euler4D> Node4D::get_rotation_degrees_euler_bind() const {
+// 	Ref<godot_4d_bind::Euler4D> rotation_degrees_euler_bind;
+// 	rotation_degrees_euler_bind.instantiate();
+// 	rotation_degrees_euler_bind->set_euler(get_rotation_degrees());
+// 	return rotation_degrees_euler_bind;
+// }
 
-Vector4 Node4D::get_scale() const {
-	return _transform.get_scale();
-}
-#endif // CACHE_ROTATION_AND_SCALE
+// Vector4 Node4D::get_scale() const {
+// 	return _transform.get_scale();
+// }
+// #endif // CACHE_ROTATION_AND_SCALE
 
 real_t Node4D::get_uniform_scale() const {
 	return _transform.basis.get_uniform_scale();
@@ -488,85 +488,85 @@ void Node4D::set_global_position(const Vector4 &p_global_position) {
 	}
 }
 
-#ifdef CACHE_ROTATION_AND_SCALE
-Euler4D Node4D::get_global_rotation() {
-	Node4D *node_4d_parent = Object::cast_to<Node4D>(get_parent());
-	if (node_4d_parent) {
-		return Euler4D::from_basis(get_global_basis());
-	} else {
-		return get_rotation();
-	}
-}
+// #ifdef CACHE_ROTATION_AND_SCALE
+// Euler4D Node4D::get_global_rotation() {
+// 	Node4D *node_4d_parent = Object::cast_to<Node4D>(get_parent());
+// 	if (node_4d_parent) {
+// 		return Euler4D::from_basis(get_global_basis());
+// 	} else {
+// 		return get_rotation();
+// 	}
+// }
 
-AABB Node4D::get_global_rotation_bind() {
-	return get_global_rotation();
-}
+// AABB Node4D::get_global_rotation_bind() {
+// 	return get_global_rotation();
+// }
 
-Ref<godot_4d_bind::Euler4D> Node4D::get_global_rotation_euler_bind() {
-	Ref<godot_4d_bind::Euler4D> rotation_euler_bind;
-	rotation_euler_bind.instantiate();
-	rotation_euler_bind->set_euler(get_global_rotation());
-	return rotation_euler_bind;
-}
+// Ref<godot_4d_bind::Euler4D> Node4D::get_global_rotation_euler_bind() {
+// 	Ref<godot_4d_bind::Euler4D> rotation_euler_bind;
+// 	rotation_euler_bind.instantiate();
+// 	rotation_euler_bind->set_euler(get_global_rotation());
+// 	return rotation_euler_bind;
+// }
 
-Euler4D Node4D::get_global_rotation_degrees() {
-	return get_global_rotation().rad_to_deg();
-}
+// Euler4D Node4D::get_global_rotation_degrees() {
+// 	return get_global_rotation().rad_to_deg();
+// }
 
-AABB Node4D::get_global_rotation_degrees_bind() {
-	return get_global_rotation_degrees();
-}
+// AABB Node4D::get_global_rotation_degrees_bind() {
+// 	return get_global_rotation_degrees();
+// }
 
-Ref<godot_4d_bind::Euler4D> Node4D::get_global_rotation_degrees_euler_bind() {
-	Ref<godot_4d_bind::Euler4D> rotation_degrees_euler_bind;
-	rotation_degrees_euler_bind.instantiate();
-	rotation_degrees_euler_bind->set_euler(get_global_rotation_degrees());
-	return rotation_degrees_euler_bind;
-}
+// Ref<godot_4d_bind::Euler4D> Node4D::get_global_rotation_degrees_euler_bind() {
+// 	Ref<godot_4d_bind::Euler4D> rotation_degrees_euler_bind;
+// 	rotation_degrees_euler_bind.instantiate();
+// 	rotation_degrees_euler_bind->set_euler(get_global_rotation_degrees());
+// 	return rotation_degrees_euler_bind;
+// }
 
-Vector4 Node4D::get_global_scale() {
-	Node4D *node_4d_parent = Object::cast_to<Node4D>(get_parent());
-	if (node_4d_parent) {
-		return get_global_basis().get_scale();
-	} else {
-		return get_scale();
-	}
-}
-#else
-Euler4D Node4D::get_global_rotation() const {
-	return Euler4D::from_basis(get_global_basis());
-}
+// Vector4 Node4D::get_global_scale() {
+// 	Node4D *node_4d_parent = Object::cast_to<Node4D>(get_parent());
+// 	if (node_4d_parent) {
+// 		return get_global_basis().get_scale();
+// 	} else {
+// 		return get_scale();
+// 	}
+// }
+// #else
+// Euler4D Node4D::get_global_rotation() const {
+// 	return Euler4D::from_basis(get_global_basis());
+// }
 
-AABB Node4D::get_global_rotation_bind() const {
-	return get_global_rotation();
-}
+// AABB Node4D::get_global_rotation_bind() const {
+// 	return get_global_rotation();
+// }
 
-Ref<godot_4d_bind::Euler4D> Node4D::get_global_rotation_euler_bind() const {
-	Ref<godot_4d_bind::Euler4D> rotation_euler_bind;
-	rotation_euler_bind.instantiate();
-	rotation_euler_bind->set_euler(get_global_rotation());
-	return rotation_euler_bind;
-}
+// Ref<godot_4d_bind::Euler4D> Node4D::get_global_rotation_euler_bind() const {
+// 	Ref<godot_4d_bind::Euler4D> rotation_euler_bind;
+// 	rotation_euler_bind.instantiate();
+// 	rotation_euler_bind->set_euler(get_global_rotation());
+// 	return rotation_euler_bind;
+// }
 
-Euler4D Node4D::get_global_rotation_degrees() const {
-	return get_global_rotation().rad_to_deg();
-}
+// Euler4D Node4D::get_global_rotation_degrees() const {
+// 	return get_global_rotation().rad_to_deg();
+// }
 
-AABB Node4D::get_global_rotation_degrees_bind() const {
-	return get_global_rotation_degrees();
-}
+// AABB Node4D::get_global_rotation_degrees_bind() const {
+// 	return get_global_rotation_degrees();
+// }
 
-Ref<godot_4d_bind::Euler4D> Node4D::get_global_rotation_degrees_euler_bind() const {
-	Ref<godot_4d_bind::Euler4D> rotation_degrees_euler_bind;
-	rotation_degrees_euler_bind.instantiate();
-	rotation_degrees_euler_bind->set_euler(get_global_rotation_degrees());
-	return rotation_degrees_euler_bind;
-}
+// Ref<godot_4d_bind::Euler4D> Node4D::get_global_rotation_degrees_euler_bind() const {
+// 	Ref<godot_4d_bind::Euler4D> rotation_degrees_euler_bind;
+// 	rotation_degrees_euler_bind.instantiate();
+// 	rotation_degrees_euler_bind->set_euler(get_global_rotation_degrees());
+// 	return rotation_degrees_euler_bind;
+// }
 
-Vector4 Node4D::get_global_scale() const {
-	return get_global_basis().get_scale();
-}
-#endif // CACHE_ROTATION_AND_SCALE
+// Vector4 Node4D::get_global_scale() const {
+// 	return get_global_basis().get_scale();
+// }
+// #endif // CACHE_ROTATION_AND_SCALE
 
 real_t Node4D::get_global_uniform_scale() const {
 	return get_global_basis().get_uniform_scale();
