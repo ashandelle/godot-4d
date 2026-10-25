@@ -159,83 +159,83 @@ void Node4D::set_position(const Vector4 &p_position) {
 	_transform.set_origin(p_position);
 }
 
-// #ifdef CACHE_ROTATION_AND_SCALE
-// Euler4D Node4D::get_rotation() {
-// 	if (_euler_cache_dirty) {
-// 		_euler_cache = Euler4D::from_basis(_transform.basis);
-// 		_euler_cache_dirty = false;
-// 	}
-// 	return _euler_cache;
-// }
+#ifdef CACHE_ROTATION_AND_SCALE
+Euler4D Node4D::get_rotation() {
+	if (_euler_cache_dirty) {
+		_euler_cache = Euler4D::from_basis(_transform.basis);
+		_euler_cache_dirty = false;
+	}
+	return _euler_cache;
+}
 
-// AABB Node4D::get_rotation_bind() {
-// 	return get_rotation();
-// }
+AABB Node4D::get_rotation_bind() {
+	return get_rotation();
+}
 
-// Ref<godot_4d_bind::Euler4D> Node4D::get_rotation_euler_bind() {
-// 	Ref<godot_4d_bind::Euler4D> rotation_euler_bind;
-// 	rotation_euler_bind.instantiate();
-// 	rotation_euler_bind->set_euler(get_rotation());
-// 	return rotation_euler_bind;
-// }
+Ref<godot_4d_bind::Euler4D> Node4D::get_rotation_euler_bind() {
+	Ref<godot_4d_bind::Euler4D> rotation_euler_bind;
+	rotation_euler_bind.instantiate();
+	rotation_euler_bind->set_euler(get_rotation());
+	return rotation_euler_bind;
+}
 
-// Euler4D Node4D::get_rotation_degrees() {
-// 	return get_rotation().rad_to_deg();
-// }
+Euler4D Node4D::get_rotation_degrees() {
+	return get_rotation().rad_to_deg();
+}
 
-// AABB Node4D::get_rotation_degrees_bind() {
-// 	return get_rotation_degrees();
-// }
+AABB Node4D::get_rotation_degrees_bind() {
+	return get_rotation_degrees();
+}
 
-// Ref<godot_4d_bind::Euler4D> Node4D::get_rotation_degrees_euler_bind() {
-// 	Ref<godot_4d_bind::Euler4D> rotation_degrees_euler_bind;
-// 	rotation_degrees_euler_bind.instantiate();
-// 	rotation_degrees_euler_bind->set_euler(get_rotation_degrees());
-// 	return rotation_degrees_euler_bind;
-// }
+Ref<godot_4d_bind::Euler4D> Node4D::get_rotation_degrees_euler_bind() {
+	Ref<godot_4d_bind::Euler4D> rotation_degrees_euler_bind;
+	rotation_degrees_euler_bind.instantiate();
+	rotation_degrees_euler_bind->set_euler(get_rotation_degrees());
+	return rotation_degrees_euler_bind;
+}
 
-// Vector4 Node4D::get_scale() {
-// 	if (_scale_cache_dirty) {
-// 		_scale_cache = _transform.get_scale();
-// 		_scale_cache_dirty = false;
-// 	}
-// 	return _scale_cache;
-// }
-// #else
-// Euler4D Node4D::get_rotation() const {
-// 	return Euler4D::from_basis(_transform.basis);
-// }
+Vector4 Node4D::get_scale() {
+	if (_scale_cache_dirty) {
+		_scale_cache = _transform.get_scale();
+		_scale_cache_dirty = false;
+	}
+	return _scale_cache;
+}
+#else
+Euler4D Node4D::get_rotation() const {
+	return Euler4D::from_basis(_transform.basis);
+}
 
-// AABB Node4D::get_rotation_bind() const {
-// 	return get_rotation();
-// }
+AABB Node4D::get_rotation_bind() const {
+	return get_rotation();
+}
 
-// Ref<godot_4d_bind::Euler4D> Node4D::get_rotation_euler_bind() const {
-// 	Ref<godot_4d_bind::Euler4D> rotation_euler_bind;
-// 	rotation_euler_bind.instantiate();
-// 	rotation_euler_bind->set_euler(get_rotation());
-// 	return rotation_euler_bind;
-// }
+Ref<godot_4d_bind::Euler4D> Node4D::get_rotation_euler_bind() const {
+	Ref<godot_4d_bind::Euler4D> rotation_euler_bind;
+	rotation_euler_bind.instantiate();
+	rotation_euler_bind->set_euler(get_rotation());
+	return rotation_euler_bind;
+}
 
-// Euler4D Node4D::get_rotation_degrees() const {
-// 	return get_rotation().rad_to_deg();
-// }
+Euler4D Node4D::get_rotation_degrees() const {
+	return get_rotation().rad_to_deg();
+}
 
-// AABB Node4D::get_rotation_degrees_bind() const {
-// 	return get_rotation_degrees();
-// }
+AABB Node4D::get_rotation_degrees_bind() const {
+	return get_rotation_degrees();
+}
 
-// Ref<godot_4d_bind::Euler4D> Node4D::get_rotation_degrees_euler_bind() const {
-// 	Ref<godot_4d_bind::Euler4D> rotation_degrees_euler_bind;
-// 	rotation_degrees_euler_bind.instantiate();
-// 	rotation_degrees_euler_bind->set_euler(get_rotation_degrees());
-// 	return rotation_degrees_euler_bind;
-// }
+Ref<godot_4d_bind::Euler4D> Node4D::get_rotation_degrees_euler_bind() const {
+	Ref<godot_4d_bind::Euler4D> rotation_degrees_euler_bind;
+	rotation_degrees_euler_bind.instantiate();
+	rotation_degrees_euler_bind->set_euler(get_rotation_degrees());
+	return rotation_degrees_euler_bind;
+}
 
-// Vector4 Node4D::get_scale() const {
-// 	return _transform.get_scale();
-// }
-// #endif // CACHE_ROTATION_AND_SCALE
+Vector4 Node4D::get_scale() const {
+	return _transform.get_scale();
+}
+#endif // CACHE_ROTATION_AND_SCALE
 
 real_t Node4D::get_uniform_scale() const {
 	return _transform.basis.get_uniform_scale();
@@ -259,21 +259,21 @@ void Node4D::set_rotation_bind(const AABB &p_euler) {
 	set_rotation(p_euler);
 }
 
-// void Node4D::set_rotation_euler_bind(const Ref<godot_4d_bind::Euler4D> &p_euler) {
-// 	set_rotation(p_euler->get_euler());
-// }
+void Node4D::set_rotation_euler_bind(const Ref<godot_4d_bind::Euler4D> &p_euler) {
+	set_rotation(p_euler->get_euler());
+}
 
-// void Node4D::set_rotation_degrees(const Euler4D &p_euler) {
-// 	set_rotation(p_euler.deg_to_rad());
-// }
+void Node4D::set_rotation_degrees(const Euler4D &p_euler) {
+	set_rotation(p_euler.deg_to_rad());
+}
 
-// void Node4D::set_rotation_degrees_bind(const AABB &p_euler) {
-// 	set_rotation_degrees(p_euler);
-// }
+void Node4D::set_rotation_degrees_bind(const AABB &p_euler) {
+	set_rotation_degrees(p_euler);
+}
 
-// void Node4D::set_rotation_degrees_euler_bind(const Ref<godot_4d_bind::Euler4D> &p_euler) {
-// 	set_rotation_degrees(p_euler->get_euler());
-// }
+void Node4D::set_rotation_degrees_euler_bind(const Ref<godot_4d_bind::Euler4D> &p_euler) {
+	set_rotation_degrees(p_euler->get_euler());
+}
 
 void Node4D::set_scale(const Vector4 &p_scale) {
 #ifdef CACHE_ROTATION_AND_SCALE
@@ -296,28 +296,28 @@ Bivector4D Node4D::get_rotation_bivector_magnitude() const {
 	return Rotor4D::from_basis(_transform.basis).get_rotation_bivector_magnitude();
 }
 
-// void Node4D::set_rotation_bivector_magnitude(const Bivector4D &p_bivector) {
-// 	const Vector4 scale = get_scale();
-// 	Rotor4D rot = Rotor4D::from_bivector_magnitude(p_bivector);
-// 	set_basis(rot.to_basis().scaled_local(scale));
-// }
+void Node4D::set_rotation_bivector_magnitude(const Bivector4D &p_bivector) {
+	const Vector4 scale = get_scale();
+	Rotor4D rot = Rotor4D::from_bivector_magnitude(p_bivector);
+	set_basis(rot.to_basis().scaled_local(scale));
+}
 
 AABB Node4D::get_rotation_bivector_magnitude_bind() const {
 	return get_rotation_bivector_magnitude();
 }
 
-// void Node4D::set_rotation_bivector_magnitude_bind(const AABB &p_bivector) {
-// 	set_rotation_bivector_magnitude(p_bivector);
-// }
+void Node4D::set_rotation_bivector_magnitude_bind(const AABB &p_bivector) {
+	set_rotation_bivector_magnitude(p_bivector);
+}
 
 Rotor4D Node4D::get_rotation_rotor() const {
 	return Rotor4D::from_basis(_transform.basis);
 }
 
-// void Node4D::set_rotation_rotor(const Rotor4D &p_rotor) {
-// 	const Vector4 scale = get_scale();
-// 	set_basis(p_rotor.normalized().to_basis().scaled_local(scale));
-// }
+void Node4D::set_rotation_rotor(const Rotor4D &p_rotor) {
+	const Vector4 scale = get_scale();
+	set_basis(p_rotor.normalized().to_basis().scaled_local(scale));
+}
 
 Ref<godot_4d_bind::Rotor4D> Node4D::get_rotation_rotor_bind() const {
 	Ref<godot_4d_bind::Rotor4D> rotor_bind;
@@ -326,77 +326,77 @@ Ref<godot_4d_bind::Rotor4D> Node4D::get_rotation_rotor_bind() const {
 	return rotor_bind;
 }
 
-// void Node4D::set_rotation_rotor_bind(const Ref<godot_4d_bind::Rotor4D> &p_rotor) {
-// 	set_rotation_rotor(p_rotor->get_rotor());
-// }
+void Node4D::set_rotation_rotor_bind(const Ref<godot_4d_bind::Rotor4D> &p_rotor) {
+	set_rotation_rotor(p_rotor->get_rotor());
+}
 
 PackedRealArray Node4D::get_rotation_rotor_array() const {
 	return get_rotation_rotor().to_array();
 }
 
-// void Node4D::set_rotation_rotor_array(const PackedRealArray &p_rotor_array) {
-// 	set_rotation_rotor(Rotor4D::from_array(p_rotor_array));
-// }
+void Node4D::set_rotation_rotor_array(const PackedRealArray &p_rotor_array) {
+	set_rotation_rotor(Rotor4D::from_array(p_rotor_array));
+}
 
 Bivector4D Node4D::get_rotor_bivector() const {
 	return Rotor4D::from_basis(_transform.basis).get_bivector();
 }
 
-// void Node4D::set_rotor_bivector(const Bivector4D &p_bivector) {
-// 	const Vector4 scale = get_scale();
-// 	const Rotor4D old_rotor = get_rotation_rotor();
-// 	const Rotor4D rot = Rotor4D(old_rotor.get_scalar(), p_bivector, old_rotor.get_pseudoscalar()).normalized();
-// 	set_basis(rot.to_basis().scaled_local(scale));
-// }
+void Node4D::set_rotor_bivector(const Bivector4D &p_bivector) {
+	const Vector4 scale = get_scale();
+	const Rotor4D old_rotor = get_rotation_rotor();
+	const Rotor4D rot = Rotor4D(old_rotor.get_scalar(), p_bivector, old_rotor.get_pseudoscalar()).normalized();
+	set_basis(rot.to_basis().scaled_local(scale));
+}
 
 AABB Node4D::get_rotor_bivector_bind() const {
 	return get_rotor_bivector();
 }
 
-// void Node4D::set_rotor_bivector_bind(const AABB &p_bivector) {
-// 	set_rotor_bivector(p_bivector);
-// }
+void Node4D::set_rotor_bivector_bind(const AABB &p_bivector) {
+	set_rotor_bivector(p_bivector);
+}
 
 real_t Node4D::get_rotor_scalar() const {
 	return Rotor4D::from_basis(_transform.basis).get_scalar();
 }
 
-// void Node4D::set_rotor_scalar(const real_t p_scalar) {
-// 	const Vector4 scale = get_scale();
-// 	const Rotor4D old_rotor = get_rotation_rotor();
-// 	const Rotor4D rot = Rotor4D(p_scalar, old_rotor.get_bivector(), old_rotor.get_pseudoscalar()).normalized();
-// 	set_basis(rot.to_basis().scaled_local(scale));
-// }
+void Node4D::set_rotor_scalar(const real_t p_scalar) {
+	const Vector4 scale = get_scale();
+	const Rotor4D old_rotor = get_rotation_rotor();
+	const Rotor4D rot = Rotor4D(p_scalar, old_rotor.get_bivector(), old_rotor.get_pseudoscalar()).normalized();
+	set_basis(rot.to_basis().scaled_local(scale));
+}
 
 real_t Node4D::get_rotor_pseudoscalar() const {
 	return Rotor4D::from_basis(_transform.basis).get_pseudoscalar();
 }
 
-// void Node4D::set_rotor_pseudoscalar(const real_t p_pseudoscalar) {
-// 	const Vector4 scale = get_scale();
-// 	const Rotor4D old_rotor = get_rotation_rotor();
-// 	const Rotor4D rot = Rotor4D(old_rotor.get_scalar(), old_rotor.get_bivector(), p_pseudoscalar).normalized();
-// 	set_basis(rot.to_basis().scaled_local(scale));
-// }
+void Node4D::set_rotor_pseudoscalar(const real_t p_pseudoscalar) {
+	const Vector4 scale = get_scale();
+	const Rotor4D old_rotor = get_rotation_rotor();
+	const Rotor4D rot = Rotor4D(old_rotor.get_scalar(), old_rotor.get_bivector(), p_pseudoscalar).normalized();
+	set_basis(rot.to_basis().scaled_local(scale));
+}
 
 SplitComplex4D Node4D::get_rotor_split_complex() const {
 	return Rotor4D::from_basis(_transform.basis).get_split_complex();
 }
 
-// void Node4D::set_rotor_split_complex(const SplitComplex4D &p_split) {
-// 	const Vector4 scale = get_scale();
-// 	const Rotor4D old_rotor = get_rotation_rotor();
-// 	const Rotor4D rot = Rotor4D(p_split.get_scalar(), old_rotor.get_bivector(), p_split.get_pseudoscalar()).normalized();
-// 	set_basis(rot.to_basis().scaled_local(scale));
-// }
+void Node4D::set_rotor_split_complex(const SplitComplex4D &p_split) {
+	const Vector4 scale = get_scale();
+	const Rotor4D old_rotor = get_rotation_rotor();
+	const Rotor4D rot = Rotor4D(p_split.get_scalar(), old_rotor.get_bivector(), p_split.get_pseudoscalar()).normalized();
+	set_basis(rot.to_basis().scaled_local(scale));
+}
 
 Vector2 Node4D::get_rotor_split_complex_bind() const {
 	return get_rotor_split_complex();
 }
 
-// void Node4D::set_rotor_split_complex_bind(const Vector2 &p_split) {
-// 	set_rotor_split_complex(p_split);
-// }
+void Node4D::set_rotor_split_complex_bind(const Vector2 &p_split) {
+	set_rotor_split_complex(p_split);
+}
 
 // Global transform and basis.
 
@@ -488,118 +488,118 @@ void Node4D::set_global_position(const Vector4 &p_global_position) {
 	}
 }
 
-// #ifdef CACHE_ROTATION_AND_SCALE
-// Euler4D Node4D::get_global_rotation() {
-// 	Node4D *node_4d_parent = Object::cast_to<Node4D>(get_parent());
-// 	if (node_4d_parent) {
-// 		return Euler4D::from_basis(get_global_basis());
-// 	} else {
-// 		return get_rotation();
-// 	}
-// }
+#ifdef CACHE_ROTATION_AND_SCALE
+Euler4D Node4D::get_global_rotation() {
+	Node4D *node_4d_parent = Object::cast_to<Node4D>(get_parent());
+	if (node_4d_parent) {
+		return Euler4D::from_basis(get_global_basis());
+	} else {
+		return get_rotation();
+	}
+}
 
-// AABB Node4D::get_global_rotation_bind() {
-// 	return get_global_rotation();
-// }
+AABB Node4D::get_global_rotation_bind() {
+	return get_global_rotation();
+}
 
-// Ref<godot_4d_bind::Euler4D> Node4D::get_global_rotation_euler_bind() {
-// 	Ref<godot_4d_bind::Euler4D> rotation_euler_bind;
-// 	rotation_euler_bind.instantiate();
-// 	rotation_euler_bind->set_euler(get_global_rotation());
-// 	return rotation_euler_bind;
-// }
+Ref<godot_4d_bind::Euler4D> Node4D::get_global_rotation_euler_bind() {
+	Ref<godot_4d_bind::Euler4D> rotation_euler_bind;
+	rotation_euler_bind.instantiate();
+	rotation_euler_bind->set_euler(get_global_rotation());
+	return rotation_euler_bind;
+}
 
-// Euler4D Node4D::get_global_rotation_degrees() {
-// 	return get_global_rotation().rad_to_deg();
-// }
+Euler4D Node4D::get_global_rotation_degrees() {
+	return get_global_rotation().rad_to_deg();
+}
 
-// AABB Node4D::get_global_rotation_degrees_bind() {
-// 	return get_global_rotation_degrees();
-// }
+AABB Node4D::get_global_rotation_degrees_bind() {
+	return get_global_rotation_degrees();
+}
 
-// Ref<godot_4d_bind::Euler4D> Node4D::get_global_rotation_degrees_euler_bind() {
-// 	Ref<godot_4d_bind::Euler4D> rotation_degrees_euler_bind;
-// 	rotation_degrees_euler_bind.instantiate();
-// 	rotation_degrees_euler_bind->set_euler(get_global_rotation_degrees());
-// 	return rotation_degrees_euler_bind;
-// }
+Ref<godot_4d_bind::Euler4D> Node4D::get_global_rotation_degrees_euler_bind() {
+	Ref<godot_4d_bind::Euler4D> rotation_degrees_euler_bind;
+	rotation_degrees_euler_bind.instantiate();
+	rotation_degrees_euler_bind->set_euler(get_global_rotation_degrees());
+	return rotation_degrees_euler_bind;
+}
 
-// Vector4 Node4D::get_global_scale() {
-// 	Node4D *node_4d_parent = Object::cast_to<Node4D>(get_parent());
-// 	if (node_4d_parent) {
-// 		return get_global_basis().get_scale();
-// 	} else {
-// 		return get_scale();
-// 	}
-// }
-// #else
-// Euler4D Node4D::get_global_rotation() const {
-// 	return Euler4D::from_basis(get_global_basis());
-// }
+Vector4 Node4D::get_global_scale() {
+	Node4D *node_4d_parent = Object::cast_to<Node4D>(get_parent());
+	if (node_4d_parent) {
+		return get_global_basis().get_scale();
+	} else {
+		return get_scale();
+	}
+}
+#else
+Euler4D Node4D::get_global_rotation() const {
+	return Euler4D::from_basis(get_global_basis());
+}
 
-// AABB Node4D::get_global_rotation_bind() const {
-// 	return get_global_rotation();
-// }
+AABB Node4D::get_global_rotation_bind() const {
+	return get_global_rotation();
+}
 
-// Ref<godot_4d_bind::Euler4D> Node4D::get_global_rotation_euler_bind() const {
-// 	Ref<godot_4d_bind::Euler4D> rotation_euler_bind;
-// 	rotation_euler_bind.instantiate();
-// 	rotation_euler_bind->set_euler(get_global_rotation());
-// 	return rotation_euler_bind;
-// }
+Ref<godot_4d_bind::Euler4D> Node4D::get_global_rotation_euler_bind() const {
+	Ref<godot_4d_bind::Euler4D> rotation_euler_bind;
+	rotation_euler_bind.instantiate();
+	rotation_euler_bind->set_euler(get_global_rotation());
+	return rotation_euler_bind;
+}
 
-// Euler4D Node4D::get_global_rotation_degrees() const {
-// 	return get_global_rotation().rad_to_deg();
-// }
+Euler4D Node4D::get_global_rotation_degrees() const {
+	return get_global_rotation().rad_to_deg();
+}
 
-// AABB Node4D::get_global_rotation_degrees_bind() const {
-// 	return get_global_rotation_degrees();
-// }
+AABB Node4D::get_global_rotation_degrees_bind() const {
+	return get_global_rotation_degrees();
+}
 
-// Ref<godot_4d_bind::Euler4D> Node4D::get_global_rotation_degrees_euler_bind() const {
-// 	Ref<godot_4d_bind::Euler4D> rotation_degrees_euler_bind;
-// 	rotation_degrees_euler_bind.instantiate();
-// 	rotation_degrees_euler_bind->set_euler(get_global_rotation_degrees());
-// 	return rotation_degrees_euler_bind;
-// }
+Ref<godot_4d_bind::Euler4D> Node4D::get_global_rotation_degrees_euler_bind() const {
+	Ref<godot_4d_bind::Euler4D> rotation_degrees_euler_bind;
+	rotation_degrees_euler_bind.instantiate();
+	rotation_degrees_euler_bind->set_euler(get_global_rotation_degrees());
+	return rotation_degrees_euler_bind;
+}
 
-// Vector4 Node4D::get_global_scale() const {
-// 	return get_global_basis().get_scale();
-// }
-// #endif // CACHE_ROTATION_AND_SCALE
+Vector4 Node4D::get_global_scale() const {
+	return get_global_basis().get_scale();
+}
+#endif // CACHE_ROTATION_AND_SCALE
 
 real_t Node4D::get_global_uniform_scale() const {
 	return get_global_basis().get_uniform_scale();
 }
 
-// void Node4D::set_global_rotation(const Euler4D &p_global_euler) {
-// 	Node4D *node_4d_parent = Object::cast_to<Node4D>(get_parent());
-// 	if (node_4d_parent) {
-// 		set_basis(node_4d_parent->get_global_basis().inverse() * p_global_euler.to_basis());
-// 	} else {
-// 		set_rotation(p_global_euler);
-// 	}
-// }
+void Node4D::set_global_rotation(const Euler4D &p_global_euler) {
+	Node4D *node_4d_parent = Object::cast_to<Node4D>(get_parent());
+	if (node_4d_parent) {
+		set_basis(node_4d_parent->get_global_basis().inverse() * p_global_euler.to_basis());
+	} else {
+		set_rotation(p_global_euler);
+	}
+}
 
-// void Node4D::set_global_rotation_bind(const AABB &p_global_euler) {
-// 	set_global_rotation(p_global_euler);
-// }
+void Node4D::set_global_rotation_bind(const AABB &p_global_euler) {
+	set_global_rotation(p_global_euler);
+}
 
-// void Node4D::set_global_rotation_euler_bind(const Ref<godot_4d_bind::Euler4D> &p_global_euler) {
-// 	set_global_rotation(p_global_euler->get_euler());
-// }
+void Node4D::set_global_rotation_euler_bind(const Ref<godot_4d_bind::Euler4D> &p_global_euler) {
+	set_global_rotation(p_global_euler->get_euler());
+}
 
-// void Node4D::set_global_rotation_degrees(const Euler4D &p_global_euler) {
-// 	set_global_rotation(p_global_euler.deg_to_rad());
-// }
+void Node4D::set_global_rotation_degrees(const Euler4D &p_global_euler) {
+	set_global_rotation(p_global_euler.deg_to_rad());
+}
 
-// void Node4D::set_global_rotation_degrees_bind(const AABB &p_global_euler) {
-// 	set_global_rotation_degrees(p_global_euler);
-// }
+void Node4D::set_global_rotation_degrees_bind(const AABB &p_global_euler) {
+	set_global_rotation_degrees(p_global_euler);
+}
 
-// void Node4D::set_global_rotation_degrees_euler_bind(const Ref<godot_4d_bind::Euler4D> &p_global_euler) {
-// 	set_global_rotation_degrees(p_global_euler->get_euler());
-// }
+void Node4D::set_global_rotation_degrees_euler_bind(const Ref<godot_4d_bind::Euler4D> &p_global_euler) {
+	set_global_rotation_degrees(p_global_euler->get_euler());
+}
 
 void Node4D::set_global_scale(const Vector4 &p_global_scale) {
 	Basis4D global_basis = get_global_basis();
@@ -619,28 +619,28 @@ Bivector4D Node4D::get_global_rotation_bivector_magnitude() const {
 	return Rotor4D::from_basis(get_global_basis()).get_rotation_bivector_magnitude();
 }
 
-// void Node4D::set_global_rotation_bivector_magnitude(const Bivector4D &p_bivector) {
-// 	const Vector4 global_scale = get_global_scale();
-// 	const Rotor4D rot = Rotor4D::from_bivector_magnitude(p_bivector);
-// 	set_global_basis(rot.to_basis().scaled_local(global_scale));
-// }
+void Node4D::set_global_rotation_bivector_magnitude(const Bivector4D &p_bivector) {
+	const Vector4 global_scale = get_global_scale();
+	const Rotor4D rot = Rotor4D::from_bivector_magnitude(p_bivector);
+	set_global_basis(rot.to_basis().scaled_local(global_scale));
+}
 
 AABB Node4D::get_global_rotation_bivector_magnitude_bind() const {
 	return get_global_rotation_bivector_magnitude();
 }
 
-// void Node4D::set_global_rotation_bivector_magnitude_bind(const AABB &p_bivector) {
-// 	set_global_rotation_bivector_magnitude(p_bivector);
-// }
+void Node4D::set_global_rotation_bivector_magnitude_bind(const AABB &p_bivector) {
+	set_global_rotation_bivector_magnitude(p_bivector);
+}
 
 Rotor4D Node4D::get_global_rotation_rotor() const {
 	return Rotor4D::from_basis(get_global_basis());
 }
 
-// void Node4D::set_global_rotation_rotor(const Rotor4D &p_rotor) {
-// 	const Vector4 global_scale = get_global_scale();
-// 	set_global_basis(p_rotor.normalized().to_basis().scaled_local(global_scale));
-// }
+void Node4D::set_global_rotation_rotor(const Rotor4D &p_rotor) {
+	const Vector4 global_scale = get_global_scale();
+	set_global_basis(p_rotor.normalized().to_basis().scaled_local(global_scale));
+}
 
 Ref<godot_4d_bind::Rotor4D> Node4D::get_global_rotation_rotor_bind() const {
 	Ref<godot_4d_bind::Rotor4D> rotor_bind;
@@ -649,80 +649,80 @@ Ref<godot_4d_bind::Rotor4D> Node4D::get_global_rotation_rotor_bind() const {
 	return rotor_bind;
 }
 
-// void Node4D::set_global_rotation_rotor_bind(const Ref<godot_4d_bind::Rotor4D> &p_rotor) {
-// 	set_global_rotation_rotor(p_rotor->get_rotor());
-// }
+void Node4D::set_global_rotation_rotor_bind(const Ref<godot_4d_bind::Rotor4D> &p_rotor) {
+	set_global_rotation_rotor(p_rotor->get_rotor());
+}
 
 PackedRealArray Node4D::get_global_rotation_rotor_array() const {
 	return get_global_rotation_rotor().to_array();
 }
 
-// void Node4D::set_global_rotation_rotor_array(const PackedRealArray &p_rotor_array) {
-// 	set_global_rotation_rotor(Rotor4D::from_array(p_rotor_array));
-// }
+void Node4D::set_global_rotation_rotor_array(const PackedRealArray &p_rotor_array) {
+	set_global_rotation_rotor(Rotor4D::from_array(p_rotor_array));
+}
 
 Bivector4D Node4D::get_global_rotor_bivector() const {
 	return Rotor4D::from_basis(get_global_basis()).get_bivector();
 }
 
-// void Node4D::set_global_rotor_bivector(const Bivector4D &p_bivector) {
-// 	const Basis4D global_basis = get_global_basis();
-// 	const Vector4 global_scale = global_basis.get_scale();
-// 	const Rotor4D rot = Rotor4D::from_scalar_bivector(Rotor4D::from_basis(global_basis).get_scalar(), p_bivector).normalized();
-// 	set_global_basis(rot.to_basis().scaled_local(global_scale));
-// }
+void Node4D::set_global_rotor_bivector(const Bivector4D &p_bivector) {
+	const Basis4D global_basis = get_global_basis();
+	const Vector4 global_scale = global_basis.get_scale();
+	const Rotor4D rot = Rotor4D::from_scalar_bivector(Rotor4D::from_basis(global_basis).get_scalar(), p_bivector).normalized();
+	set_global_basis(rot.to_basis().scaled_local(global_scale));
+}
 
 AABB Node4D::get_global_rotor_bivector_bind() const {
 	return get_global_rotor_bivector();
 }
 
-// void Node4D::set_global_rotor_bivector_bind(const AABB &p_bivector) {
-// 	set_global_rotor_bivector(p_bivector);
-// }
+void Node4D::set_global_rotor_bivector_bind(const AABB &p_bivector) {
+	set_global_rotor_bivector(p_bivector);
+}
 
 real_t Node4D::get_global_rotor_scalar() const {
 	return Rotor4D::from_basis(get_global_basis()).get_scalar();
 }
 
-// void Node4D::set_global_rotor_scalar(const real_t p_scalar) {
-// 	const Basis4D global_basis = get_global_basis();
-// 	const Vector4 global_scale = global_basis.get_scale();
-// 	const Rotor4D old_global_rotor = Rotor4D::from_basis(global_basis);
-// 	const Rotor4D rot = Rotor4D(p_scalar, old_global_rotor.get_bivector(), old_global_rotor.get_pseudoscalar()).normalized();
-// 	set_global_basis(rot.to_basis().scaled_local(global_scale));
-// }
+void Node4D::set_global_rotor_scalar(const real_t p_scalar) {
+	const Basis4D global_basis = get_global_basis();
+	const Vector4 global_scale = global_basis.get_scale();
+	const Rotor4D old_global_rotor = Rotor4D::from_basis(global_basis);
+	const Rotor4D rot = Rotor4D(p_scalar, old_global_rotor.get_bivector(), old_global_rotor.get_pseudoscalar()).normalized();
+	set_global_basis(rot.to_basis().scaled_local(global_scale));
+}
 
 real_t Node4D::get_global_rotor_pseudoscalar() const {
 	return Rotor4D::from_basis(get_global_basis()).get_pseudoscalar();
 }
 
-// void Node4D::set_global_rotor_pseudoscalar(const real_t p_pseudoscalar) {
-// 	const Basis4D global_basis = get_global_basis();
-// 	const Vector4 global_scale = global_basis.get_scale();
-// 	const Rotor4D old_global_rotor = Rotor4D::from_basis(global_basis);
-// 	const Rotor4D rot = Rotor4D(old_global_rotor.get_scalar(), old_global_rotor.get_bivector(), p_pseudoscalar).normalized();
-// 	set_global_basis(rot.to_basis().scaled_local(global_scale));
-// }
+void Node4D::set_global_rotor_pseudoscalar(const real_t p_pseudoscalar) {
+	const Basis4D global_basis = get_global_basis();
+	const Vector4 global_scale = global_basis.get_scale();
+	const Rotor4D old_global_rotor = Rotor4D::from_basis(global_basis);
+	const Rotor4D rot = Rotor4D(old_global_rotor.get_scalar(), old_global_rotor.get_bivector(), p_pseudoscalar).normalized();
+	set_global_basis(rot.to_basis().scaled_local(global_scale));
+}
 
 SplitComplex4D Node4D::get_global_rotor_split_complex() const {
 	return Rotor4D::from_basis(get_global_basis()).get_split_complex();
 }
 
-// void Node4D::set_global_rotor_split_complex(const SplitComplex4D &p_split) {
-// 	const Basis4D global_basis = get_global_basis();
-// 	const Vector4 global_scale = global_basis.get_scale();
-// 	const Rotor4D old_global_rotor = Rotor4D::from_basis(global_basis);
-// 	const Rotor4D rot = Rotor4D(p_split.get_scalar(), old_global_rotor.get_bivector(), p_split.get_pseudoscalar()).normalized();
-// 	set_global_basis(rot.to_basis().scaled_local(global_scale));
-// }
+void Node4D::set_global_rotor_split_complex(const SplitComplex4D &p_split) {
+	const Basis4D global_basis = get_global_basis();
+	const Vector4 global_scale = global_basis.get_scale();
+	const Rotor4D old_global_rotor = Rotor4D::from_basis(global_basis);
+	const Rotor4D rot = Rotor4D(p_split.get_scalar(), old_global_rotor.get_bivector(), p_split.get_pseudoscalar()).normalized();
+	set_global_basis(rot.to_basis().scaled_local(global_scale));
+}
 
 Vector2 Node4D::get_global_rotor_split_complex_bind() const {
 	return get_global_rotor_split_complex();
 }
 
-// void Node4D::set_global_rotor_split_complex_bind(const Vector2 &p_split) {
-// 	set_global_rotor_split_complex(p_split);
-// }
+void Node4D::set_global_rotor_split_complex_bind(const Vector2 &p_split) {
+	set_global_rotor_split_complex(p_split);
+}
 
 // Visibility.
 
@@ -837,35 +837,35 @@ void Node4D::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_basis"), &Node4D::get_basis_bind);
 	ClassDB::bind_method(D_METHOD("set_basis", "basis"), &Node4D::set_basis_bind);
 	// Local transform components.
-	// ClassDB::bind_method(D_METHOD("get_position"), &Node4D::get_position);
+	ClassDB::bind_method(D_METHOD("get_position"), &Node4D::get_position);
 	ClassDB::bind_method(D_METHOD("set_position", "position"), &Node4D::set_position);
-	// ClassDB::bind_method(D_METHOD("get_rotation"), &Node4D::get_rotation_bind);
+	ClassDB::bind_method(D_METHOD("get_rotation"), &Node4D::get_rotation_bind);
 	ClassDB::bind_method(D_METHOD("set_rotation", "euler"), &Node4D::set_rotation_bind);
-	// ClassDB::bind_method(D_METHOD("get_rotation_euler"), &Node4D::get_rotation_euler_bind);
-	// ClassDB::bind_method(D_METHOD("set_rotation_euler", "euler"), &Node4D::set_rotation_euler_bind);
-	// ClassDB::bind_method(D_METHOD("get_rotation_degrees"), &Node4D::get_rotation_degrees_bind);
-	// ClassDB::bind_method(D_METHOD("set_rotation_degrees", "euler"), &Node4D::set_rotation_degrees_bind);
-	// ClassDB::bind_method(D_METHOD("get_rotation_degrees_euler"), &Node4D::get_rotation_degrees_euler_bind);
-	// ClassDB::bind_method(D_METHOD("set_rotation_degrees_euler", "euler"), &Node4D::set_rotation_degrees_euler_bind);
-	// ClassDB::bind_method(D_METHOD("get_scale"), &Node4D::get_scale);
+	ClassDB::bind_method(D_METHOD("get_rotation_euler"), &Node4D::get_rotation_euler_bind);
+	ClassDB::bind_method(D_METHOD("set_rotation_euler", "euler"), &Node4D::set_rotation_euler_bind);
+	ClassDB::bind_method(D_METHOD("get_rotation_degrees"), &Node4D::get_rotation_degrees_bind);
+	ClassDB::bind_method(D_METHOD("set_rotation_degrees", "euler"), &Node4D::set_rotation_degrees_bind);
+	ClassDB::bind_method(D_METHOD("get_rotation_degrees_euler"), &Node4D::get_rotation_degrees_euler_bind);
+	ClassDB::bind_method(D_METHOD("set_rotation_degrees_euler", "euler"), &Node4D::set_rotation_degrees_euler_bind);
+	ClassDB::bind_method(D_METHOD("get_scale"), &Node4D::get_scale);
 	ClassDB::bind_method(D_METHOD("set_scale", "scale"), &Node4D::set_scale);
-	// ClassDB::bind_method(D_METHOD("get_uniform_scale"), &Node4D::get_uniform_scale);
+	ClassDB::bind_method(D_METHOD("get_uniform_scale"), &Node4D::get_uniform_scale);
 	ClassDB::bind_method(D_METHOD("set_uniform_scale", "uniform_scale"), &Node4D::set_uniform_scale);
 	// Geometric algebra local rotation properties.
 	ClassDB::bind_method(D_METHOD("get_rotation_bivector_magnitude"), &Node4D::get_rotation_bivector_magnitude_bind);
-	// ClassDB::bind_method(D_METHOD("set_rotation_bivector_magnitude", "bivector"), &Node4D::set_rotation_bivector_magnitude_bind);
+	ClassDB::bind_method(D_METHOD("set_rotation_bivector_magnitude", "bivector"), &Node4D::set_rotation_bivector_magnitude_bind);
 	ClassDB::bind_method(D_METHOD("get_rotation_rotor"), &Node4D::get_rotation_rotor_bind);
-	// ClassDB::bind_method(D_METHOD("set_rotation_rotor", "rotor"), &Node4D::set_rotation_rotor_bind);
+	ClassDB::bind_method(D_METHOD("set_rotation_rotor", "rotor"), &Node4D::set_rotation_rotor_bind);
 	ClassDB::bind_method(D_METHOD("get_rotation_rotor_array"), &Node4D::get_rotation_rotor_array);
-	// ClassDB::bind_method(D_METHOD("set_rotation_rotor_array", "rotor_array"), &Node4D::set_rotation_rotor_array);
+	ClassDB::bind_method(D_METHOD("set_rotation_rotor_array", "rotor_array"), &Node4D::set_rotation_rotor_array);
 	ClassDB::bind_method(D_METHOD("get_rotor_bivector"), &Node4D::get_rotor_bivector_bind);
-	// ClassDB::bind_method(D_METHOD("set_rotor_bivector", "bivector"), &Node4D::set_rotor_bivector_bind);
+	ClassDB::bind_method(D_METHOD("set_rotor_bivector", "bivector"), &Node4D::set_rotor_bivector_bind);
 	ClassDB::bind_method(D_METHOD("get_rotor_scalar"), &Node4D::get_rotor_scalar);
-	// ClassDB::bind_method(D_METHOD("set_rotor_scalar", "scalar"), &Node4D::set_rotor_scalar);
+	ClassDB::bind_method(D_METHOD("set_rotor_scalar", "scalar"), &Node4D::set_rotor_scalar);
 	ClassDB::bind_method(D_METHOD("get_rotor_pseudoscalar"), &Node4D::get_rotor_pseudoscalar);
-	// ClassDB::bind_method(D_METHOD("set_rotor_pseudoscalar", "pseudoscalar"), &Node4D::set_rotor_pseudoscalar);
+	ClassDB::bind_method(D_METHOD("set_rotor_pseudoscalar", "pseudoscalar"), &Node4D::set_rotor_pseudoscalar);
 	ClassDB::bind_method(D_METHOD("get_rotor_split_complex"), &Node4D::get_rotor_split_complex_bind);
-	// ClassDB::bind_method(D_METHOD("set_rotor_split_complex", "split"), &Node4D::set_rotor_split_complex_bind);
+	ClassDB::bind_method(D_METHOD("set_rotor_split_complex", "split"), &Node4D::set_rotor_split_complex_bind);
 	// Global transform and basis.
 	ClassDB::bind_method(D_METHOD("get_global_transform"), &Node4D::get_global_transform_bind);
 	ClassDB::bind_method(D_METHOD("set_global_transform", "global_transform"), &Node4D::set_global_transform_bind);
@@ -874,35 +874,35 @@ void Node4D::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_global_basis"), &Node4D::get_global_basis_bind);
 	ClassDB::bind_method(D_METHOD("set_global_basis", "global_basis"), &Node4D::set_global_basis_bind);
 	// Global transform components.
-	// ClassDB::bind_method(D_METHOD("get_global_position"), &Node4D::get_global_position);
+	ClassDB::bind_method(D_METHOD("get_global_position"), &Node4D::get_global_position);
 	ClassDB::bind_method(D_METHOD("set_global_position", "global_position"), &Node4D::set_global_position);
-	// ClassDB::bind_method(D_METHOD("get_global_rotation"), &Node4D::get_global_rotation_bind);
-	// ClassDB::bind_method(D_METHOD("set_global_rotation", "global_euler"), &Node4D::set_global_rotation_bind);
-	// ClassDB::bind_method(D_METHOD("get_global_rotation_euler"), &Node4D::get_global_rotation_euler_bind);
-	// ClassDB::bind_method(D_METHOD("set_global_rotation_euler", "global_euler"), &Node4D::set_global_rotation_euler_bind);
-	// ClassDB::bind_method(D_METHOD("get_global_rotation_degrees"), &Node4D::get_global_rotation_degrees_bind);
-	// ClassDB::bind_method(D_METHOD("set_global_rotation_degrees", "global_euler"), &Node4D::set_global_rotation_degrees_bind);
-	// ClassDB::bind_method(D_METHOD("get_global_rotation_degrees_euler"), &Node4D::get_global_rotation_degrees_euler_bind);
-	// ClassDB::bind_method(D_METHOD("set_global_rotation_degrees_euler", "global_euler"), &Node4D::set_global_rotation_degrees_euler_bind);
-	// ClassDB::bind_method(D_METHOD("get_global_scale"), &Node4D::get_global_scale);
+	ClassDB::bind_method(D_METHOD("get_global_rotation"), &Node4D::get_global_rotation_bind);
+	ClassDB::bind_method(D_METHOD("set_global_rotation", "global_euler"), &Node4D::set_global_rotation_bind);
+	ClassDB::bind_method(D_METHOD("get_global_rotation_euler"), &Node4D::get_global_rotation_euler_bind);
+	ClassDB::bind_method(D_METHOD("set_global_rotation_euler", "global_euler"), &Node4D::set_global_rotation_euler_bind);
+	ClassDB::bind_method(D_METHOD("get_global_rotation_degrees"), &Node4D::get_global_rotation_degrees_bind);
+	ClassDB::bind_method(D_METHOD("set_global_rotation_degrees", "global_euler"), &Node4D::set_global_rotation_degrees_bind);
+	ClassDB::bind_method(D_METHOD("get_global_rotation_degrees_euler"), &Node4D::get_global_rotation_degrees_euler_bind);
+	ClassDB::bind_method(D_METHOD("set_global_rotation_degrees_euler", "global_euler"), &Node4D::set_global_rotation_degrees_euler_bind);
+	ClassDB::bind_method(D_METHOD("get_global_scale"), &Node4D::get_global_scale);
 	ClassDB::bind_method(D_METHOD("set_global_scale", "global_scale"), &Node4D::set_global_scale);
-	// ClassDB::bind_method(D_METHOD("get_global_uniform_scale"), &Node4D::get_global_uniform_scale);
+	ClassDB::bind_method(D_METHOD("get_global_uniform_scale"), &Node4D::get_global_uniform_scale);
 	ClassDB::bind_method(D_METHOD("set_global_uniform_scale", "global_uniform_scale"), &Node4D::set_global_uniform_scale);
 	// Geometric algebra global rotation properties.
 	ClassDB::bind_method(D_METHOD("get_global_rotation_bivector_magnitude"), &Node4D::get_global_rotation_bivector_magnitude_bind);
-	// ClassDB::bind_method(D_METHOD("set_global_rotation_bivector_magnitude", "global_bivector"), &Node4D::set_global_rotation_bivector_magnitude_bind);
+	ClassDB::bind_method(D_METHOD("set_global_rotation_bivector_magnitude", "global_bivector"), &Node4D::set_global_rotation_bivector_magnitude_bind);
 	ClassDB::bind_method(D_METHOD("get_global_rotation_rotor"), &Node4D::get_global_rotation_rotor_bind);
-	// ClassDB::bind_method(D_METHOD("set_global_rotation_rotor", "global_rotor"), &Node4D::set_global_rotation_rotor_bind);
+	ClassDB::bind_method(D_METHOD("set_global_rotation_rotor", "global_rotor"), &Node4D::set_global_rotation_rotor_bind);
 	ClassDB::bind_method(D_METHOD("get_global_rotation_rotor_array"), &Node4D::get_global_rotation_rotor_array);
-	// ClassDB::bind_method(D_METHOD("set_global_rotation_rotor_array", "global_rotor_array"), &Node4D::set_global_rotation_rotor_array);
+	ClassDB::bind_method(D_METHOD("set_global_rotation_rotor_array", "global_rotor_array"), &Node4D::set_global_rotation_rotor_array);
 	ClassDB::bind_method(D_METHOD("get_global_rotor_bivector"), &Node4D::get_global_rotor_bivector_bind);
-	// ClassDB::bind_method(D_METHOD("set_global_rotor_bivector", "global_bivector"), &Node4D::set_global_rotor_bivector_bind);
+	ClassDB::bind_method(D_METHOD("set_global_rotor_bivector", "global_bivector"), &Node4D::set_global_rotor_bivector_bind);
 	ClassDB::bind_method(D_METHOD("get_global_rotor_scalar"), &Node4D::get_global_rotor_scalar);
-	// ClassDB::bind_method(D_METHOD("set_global_rotor_scalar", "global_scalar"), &Node4D::set_global_rotor_scalar);
+	ClassDB::bind_method(D_METHOD("set_global_rotor_scalar", "global_scalar"), &Node4D::set_global_rotor_scalar);
 	ClassDB::bind_method(D_METHOD("get_global_rotor_pseudoscalar"), &Node4D::get_global_rotor_pseudoscalar);
-	// ClassDB::bind_method(D_METHOD("set_global_rotor_pseudoscalar", "global_pseudoscalar"), &Node4D::set_global_rotor_pseudoscalar);
+	ClassDB::bind_method(D_METHOD("set_global_rotor_pseudoscalar", "global_pseudoscalar"), &Node4D::set_global_rotor_pseudoscalar);
 	ClassDB::bind_method(D_METHOD("get_global_rotor_split_complex"), &Node4D::get_global_rotor_split_complex_bind);
-	// ClassDB::bind_method(D_METHOD("set_global_rotor_split_complex", "global_split"), &Node4D::set_global_rotor_split_complex_bind);
+	ClassDB::bind_method(D_METHOD("set_global_rotor_split_complex", "global_split"), &Node4D::set_global_rotor_split_complex_bind);
 	// Visibility.
 	ClassDB::bind_method(D_METHOD("is_visible"), &Node4D::is_visible);
 	ClassDB::bind_method(D_METHOD("is_visible_in_tree"), &Node4D::is_visible_in_tree);

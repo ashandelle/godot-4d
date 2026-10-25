@@ -15,7 +15,7 @@
 #endif
 
 #ifdef TOOLS_ENABLED
-#define CACHE_ROTATION_AND_SCALE
+// #define CACHE_ROTATION_AND_SCALE
 #endif // TOOLS_ENABLED
 
 class Node4D : public Node {
@@ -91,56 +91,56 @@ public:
 	// Local transform components.
 	Vector4 get_position() const;
 	void set_position(const Vector4 &p_position);
-// #ifdef CACHE_ROTATION_AND_SCALE
-// 	Euler4D get_rotation();
-// 	AABB get_rotation_bind();
-// 	Ref<godot_4d_bind::Euler4D> get_rotation_euler_bind();
-// 	Euler4D get_rotation_degrees();
-// 	AABB get_rotation_degrees_bind();
-// 	Ref<godot_4d_bind::Euler4D> get_rotation_degrees_euler_bind();
-// 	Vector4 get_scale();
-// #else
-// 	Euler4D get_rotation() const;
-// 	AABB get_rotation_bind() const;
-// 	Ref<godot_4d_bind::Euler4D> get_rotation_euler_bind() const;
-// 	Euler4D get_rotation_degrees() const;
-// 	AABB get_rotation_degrees_bind() const;
-// 	Ref<godot_4d_bind::Euler4D> get_rotation_degrees_euler_bind() const;
-// 	Vector4 get_scale() const;
-// #endif // CACHE_ROTATION_AND_SCALE
+#ifdef CACHE_ROTATION_AND_SCALE
+	Euler4D get_rotation();
+	AABB get_rotation_bind();
+	Ref<godot_4d_bind::Euler4D> get_rotation_euler_bind();
+	Euler4D get_rotation_degrees();
+	AABB get_rotation_degrees_bind();
+	Ref<godot_4d_bind::Euler4D> get_rotation_degrees_euler_bind();
+	Vector4 get_scale();
+#else
+	Euler4D get_rotation() const;
+	AABB get_rotation_bind() const;
+	Ref<godot_4d_bind::Euler4D> get_rotation_euler_bind() const;
+	Euler4D get_rotation_degrees() const;
+	AABB get_rotation_degrees_bind() const;
+	Ref<godot_4d_bind::Euler4D> get_rotation_degrees_euler_bind() const;
+	Vector4 get_scale() const;
+#endif // CACHE_ROTATION_AND_SCALE
 	real_t get_uniform_scale() const;
 	void set_rotation(const Euler4D &p_euler);
 	void set_rotation_bind(const AABB &p_euler);
-	// void set_rotation_euler_bind(const Ref<godot_4d_bind::Euler4D> &p_euler);
-	// void set_rotation_degrees(const Euler4D &p_euler);
-	// void set_rotation_degrees_bind(const AABB &p_euler);
-	// void set_rotation_degrees_euler_bind(const Ref<godot_4d_bind::Euler4D> &p_euler);
+	void set_rotation_euler_bind(const Ref<godot_4d_bind::Euler4D> &p_euler);
+	void set_rotation_degrees(const Euler4D &p_euler);
+	void set_rotation_degrees_bind(const AABB &p_euler);
+	void set_rotation_degrees_euler_bind(const Ref<godot_4d_bind::Euler4D> &p_euler);
 	void set_scale(const Vector4 &p_scale);
 	void set_uniform_scale(const real_t p_scale);
 
 	// Geometric algebra local rotation properties.
 	Bivector4D get_rotation_bivector_magnitude() const;
-	// void set_rotation_bivector_magnitude(const Bivector4D &p_bivector);
+	void set_rotation_bivector_magnitude(const Bivector4D &p_bivector);
 	AABB get_rotation_bivector_magnitude_bind() const;
-	// void set_rotation_bivector_magnitude_bind(const AABB &p_bivector);
+	void set_rotation_bivector_magnitude_bind(const AABB &p_bivector);
 	Rotor4D get_rotation_rotor() const;
-	// void set_rotation_rotor(const Rotor4D &p_rotor);
+	void set_rotation_rotor(const Rotor4D &p_rotor);
 	Ref<godot_4d_bind::Rotor4D> get_rotation_rotor_bind() const;
-	// void set_rotation_rotor_bind(const Ref<godot_4d_bind::Rotor4D> &p_rotor);
+	void set_rotation_rotor_bind(const Ref<godot_4d_bind::Rotor4D> &p_rotor);
 	PackedRealArray get_rotation_rotor_array() const;
 	void set_rotation_rotor_array(const PackedRealArray &p_rotor_array);
 	Bivector4D get_rotor_bivector() const;
-	// void set_rotor_bivector(const Bivector4D &p_bivector);
+	void set_rotor_bivector(const Bivector4D &p_bivector);
 	AABB get_rotor_bivector_bind() const;
-	// void set_rotor_bivector_bind(const AABB &p_bivector);
+	void set_rotor_bivector_bind(const AABB &p_bivector);
 	real_t get_rotor_scalar() const;
-	// void set_rotor_scalar(const real_t p_scalar);
+	void set_rotor_scalar(const real_t p_scalar);
 	real_t get_rotor_pseudoscalar() const;
-	// void set_rotor_pseudoscalar(const real_t p_pseudoscalar);
+	void set_rotor_pseudoscalar(const real_t p_pseudoscalar);
 	SplitComplex4D get_rotor_split_complex() const;
-	// void set_rotor_split_complex(const SplitComplex4D &p_split);
+	void set_rotor_split_complex(const SplitComplex4D &p_split);
 	Vector2 get_rotor_split_complex_bind() const;
-	// void set_rotor_split_complex_bind(const Vector2 &p_split);
+	void set_rotor_split_complex_bind(const Vector2 &p_split);
 
 	// Global transform and basis.
 	Transform4D get_global_transform() const;
@@ -158,56 +158,56 @@ public:
 	Vector4 get_global_position() const;
 	void set_global_position(const Vector4 &p_global_position);
 
-// #ifdef CACHE_ROTATION_AND_SCALE
-// 	Euler4D get_global_rotation();
-// 	AABB get_global_rotation_bind();
-// 	Ref<godot_4d_bind::Euler4D> get_global_rotation_euler_bind();
-// 	Euler4D get_global_rotation_degrees();
-// 	AABB get_global_rotation_degrees_bind();
-// 	Ref<godot_4d_bind::Euler4D> get_global_rotation_degrees_euler_bind();
-// 	Vector4 get_global_scale();
-// #else
-// 	Euler4D get_global_rotation() const;
-// 	AABB get_global_rotation_bind() const;
-// 	Ref<godot_4d_bind::Euler4D> get_global_rotation_euler_bind() const;
-// 	Euler4D get_global_rotation_degrees() const;
-// 	AABB get_global_rotation_degrees_bind() const;
-// 	Ref<godot_4d_bind::Euler4D> get_global_rotation_degrees_euler_bind() const;
-// 	Vector4 get_global_scale() const;
-// #endif // CACHE_ROTATION_AND_SCALE
+#ifdef CACHE_ROTATION_AND_SCALE
+	Euler4D get_global_rotation();
+	AABB get_global_rotation_bind();
+	Ref<godot_4d_bind::Euler4D> get_global_rotation_euler_bind();
+	Euler4D get_global_rotation_degrees();
+	AABB get_global_rotation_degrees_bind();
+	Ref<godot_4d_bind::Euler4D> get_global_rotation_degrees_euler_bind();
+	Vector4 get_global_scale();
+#else
+	Euler4D get_global_rotation() const;
+	AABB get_global_rotation_bind() const;
+	Ref<godot_4d_bind::Euler4D> get_global_rotation_euler_bind() const;
+	Euler4D get_global_rotation_degrees() const;
+	AABB get_global_rotation_degrees_bind() const;
+	Ref<godot_4d_bind::Euler4D> get_global_rotation_degrees_euler_bind() const;
+	Vector4 get_global_scale() const;
+#endif // CACHE_ROTATION_AND_SCALE
 	real_t get_global_uniform_scale() const;
-	// void set_global_rotation(const Euler4D &p_global_euler);
-	// void set_global_rotation_bind(const AABB &p_global_euler);
-	// void set_global_rotation_euler_bind(const Ref<godot_4d_bind::Euler4D> &p_global_euler);
-	// void set_global_rotation_degrees(const Euler4D &p_global_euler);
-	// void set_global_rotation_degrees_bind(const AABB &p_global_euler);
-	// void set_global_rotation_degrees_euler_bind(const Ref<godot_4d_bind::Euler4D> &p_global_euler);
+	void set_global_rotation(const Euler4D &p_global_euler);
+	void set_global_rotation_bind(const AABB &p_global_euler);
+	void set_global_rotation_euler_bind(const Ref<godot_4d_bind::Euler4D> &p_global_euler);
+	void set_global_rotation_degrees(const Euler4D &p_global_euler);
+	void set_global_rotation_degrees_bind(const AABB &p_global_euler);
+	void set_global_rotation_degrees_euler_bind(const Ref<godot_4d_bind::Euler4D> &p_global_euler);
 	void set_global_scale(const Vector4 &p_global_scale);
 	void set_global_uniform_scale(const real_t p_global_scale);
 
 	// Geometric algebra global rotation properties.
 	Bivector4D get_global_rotation_bivector_magnitude() const;
-	// void set_global_rotation_bivector_magnitude(const Bivector4D &p_bivector);
+	void set_global_rotation_bivector_magnitude(const Bivector4D &p_bivector);
 	AABB get_global_rotation_bivector_magnitude_bind() const;
-	// void set_global_rotation_bivector_magnitude_bind(const AABB &p_bivector);
+	void set_global_rotation_bivector_magnitude_bind(const AABB &p_bivector);
 	Rotor4D get_global_rotation_rotor() const;
-	// void set_global_rotation_rotor(const Rotor4D &p_rotor);
+	void set_global_rotation_rotor(const Rotor4D &p_rotor);
 	Ref<godot_4d_bind::Rotor4D> get_global_rotation_rotor_bind() const;
-	// void set_global_rotation_rotor_bind(const Ref<godot_4d_bind::Rotor4D> &p_rotor);
+	void set_global_rotation_rotor_bind(const Ref<godot_4d_bind::Rotor4D> &p_rotor);
 	PackedRealArray get_global_rotation_rotor_array() const;
-	// void set_global_rotation_rotor_array(const PackedRealArray &p_rotor_array);
+	void set_global_rotation_rotor_array(const PackedRealArray &p_rotor_array);
 	Bivector4D get_global_rotor_bivector() const;
-	// void set_global_rotor_bivector(const Bivector4D &p_bivector);
+	void set_global_rotor_bivector(const Bivector4D &p_bivector);
 	AABB get_global_rotor_bivector_bind() const;
-	// void set_global_rotor_bivector_bind(const AABB &p_bivector);
+	void set_global_rotor_bivector_bind(const AABB &p_bivector);
 	real_t get_global_rotor_scalar() const;
-	// void set_global_rotor_scalar(const real_t p_scalar);
+	void set_global_rotor_scalar(const real_t p_scalar);
 	real_t get_global_rotor_pseudoscalar() const;
-	// void set_global_rotor_pseudoscalar(const real_t p_pseudoscalar);
+	void set_global_rotor_pseudoscalar(const real_t p_pseudoscalar);
 	SplitComplex4D get_global_rotor_split_complex() const;
-	// void set_global_rotor_split_complex(const SplitComplex4D &p_split);
+	void set_global_rotor_split_complex(const SplitComplex4D &p_split);
 	Vector2 get_global_rotor_split_complex_bind() const;
-	// void set_global_rotor_split_complex_bind(const Vector2 &p_split);
+	void set_global_rotor_split_complex_bind(const Vector2 &p_split);
 
 	// Visibility.
 	bool is_visible() const;
